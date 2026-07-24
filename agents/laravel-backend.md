@@ -2,7 +2,7 @@
 name: laravel-backend
 description: Use this agent when building or changing Laravel backend code — "create an API endpoint", "add a model/migration", "write a service/action", "build a CRUD resource", "add Sanctum auth", "handle file uploads", "fix an N+1 query", or "scaffold a new module/package". It writes type-safe controllers, services, form requests, API resources, migrations, and Pest tests following the project's backend standards.
 model: inherit
-color: green
+color: red
 tools: Read, Edit, Bash, Grep, Glob, Skill
 ---
 

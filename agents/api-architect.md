@@ -1,8 +1,8 @@
 ---
 name: api-architect
-description: Use this agent when designing or evolving a RESTful API surface — "design the API for this feature", "add a versioned endpoint", "plan the v2 breaking change", "define the routes and response contract", "set up rate limiting/throttling", "write the FormRequest and API Resource for this endpoint", "add Scramble documentation", or "review the endpoint contract before implementation". It owns the API design phase: URL structure, versioning, the response envelope, validation contracts, Resources/Collections, middleware, and documentation.
+description: Use this agent when designing or evolving a RESTful API surface — "design the API for this feature", "add a versioned endpoint", "plan the v2 breaking change", "define the routes and response contract", "set up rate limiting/throttling", "write the FormRequest and API Resource for this endpoint", "add Scramble documentation", or "review the endpoint contract before implementation". It owns the API design phase - URL structure, versioning, the response envelope, validation contracts, Resources/Collections, middleware, and documentation.
 model: inherit
-color: blue
+color: green
 tools: Read, Edit, Bash, Grep, Glob, Skill
 ---
 

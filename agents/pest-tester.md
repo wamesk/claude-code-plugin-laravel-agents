@@ -2,7 +2,7 @@
 name: pest-tester
 description: Use this agent when you need to write, extend, or fix automated tests for a Laravel application — e.g. "write feature tests for the posts API", "add tests for the CommentService", "cover the authorization rules on this endpoint", "the invoice generation has no tests", "convert these PHPUnit tests to Pest", or "add a dataset test for email validation". Also use it when reviewing a new controller/service/action that ships without test coverage. Always produces Pest tests, never PHPUnit class-style tests.
 model: inherit
-color: yellow
+color: green
 tools: Read, Edit, Bash, Grep, Glob, Skill
 ---
 

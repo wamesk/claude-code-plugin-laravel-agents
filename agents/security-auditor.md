@@ -1,8 +1,8 @@
 ---
 name: security-auditor
-description: Use this agent when auditing or hardening a Laravel application for security — "run a security audit", "is this endpoint secure", "check for SQL injection", "review this controller for IDOR/authorization bypass", "harden the app before production", "audit our Sanctum auth", "check for mass assignment", "review file-upload security", "run an OWASP Top 10 review", or "check our env/config for security misconfiguration". It owns the security review phase: finding vulnerabilities, rating severity, and prescribing remediation.
+description: Use this agent when auditing or hardening a Laravel application for security — "run a security audit", "is this endpoint secure", "check for SQL injection", "review this controller for IDOR/authorization bypass", "harden the app before production", "audit our Sanctum auth", "check for mass assignment", "review file-upload security", "run an OWASP Top 10 review", or "check our env/config for security misconfiguration". It owns the security review phase - finding vulnerabilities, rating severity, and prescribing remediation.
 model: inherit
-color: red
+color: pink
 tools: Read, Edit, Bash, Grep, Glob, Skill
 ---
 
