@@ -11,10 +11,6 @@ return new class extends Migration
         Schema::create('{{TABLE}}', function (Blueprint $table) {
             $table->ulid('id')->primary();
 
-            // $table->string('name');
-
-            // Datetime standard: dateTimeTz() for all timestamp columns.
-            // Never use timestamps(), softDeletes(), or plain datetime().
             $table->dateTimeTz('created_at')->nullable();
             $table->dateTimeTz('updated_at')->nullable();
             $table->dateTimeTz('deleted_at')->nullable();
