@@ -1,0 +1,7 @@
+{{-- Package view — referenced as view('{{PACKAGE}}::example') once
+     loadViewsFrom(__DIR__.'/../resources/views', '{{PACKAGE}}') is enabled. --}}
+@extends('layouts.app')
+
+@section('content')
+    <h1>{{ __('{{PACKAGE}}::messages.title') }}</h1>
+@endsection

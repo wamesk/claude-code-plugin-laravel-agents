@@ -1,0 +1,28 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('{{TABLE}}', function (Blueprint $table) {
+            $table->ulid('id')->primary();
+
+            // $table->string('name');
+
+            // Datetime standard: dateTimeTz() for all timestamp columns.
+            // Never use timestamps(), softDeletes(), or plain datetime().
+            $table->dateTimeTz('created_at')->nullable();
+            $table->dateTimeTz('updated_at')->nullable();
+            $table->dateTimeTz('deleted_at')->nullable();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('{{TABLE}}');
+    }
+};

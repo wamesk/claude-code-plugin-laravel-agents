@@ -1,0 +1,28 @@
+<?php
+
+use {{NAMESPACE}}\{{CLASS_PREFIX}}\{{CLASS_PREFIX}}ServiceProvider;
+
+/**
+ * Pest test skeleton for the package service provider.
+ *
+ * A standalone package boots inside a minimal app kernel provided by
+ * orchestra/testbench. Wire it once in tests/Pest.php, e.g.:
+ *
+ *   uses(Orchestra\Testbench\TestCase::class)->in(__DIR__);
+ *
+ * and register the provider from your Testbench base case:
+ *
+ *   protected function getPackageProviders($app): array
+ *   {
+ *       return [{{CLASS_PREFIX}}ServiceProvider::class];
+ *   }
+ */
+
+it('boots the application with the package provider registered', function () {
+    expect(app()->getLoadedProviders())
+        ->toHaveKey({{CLASS_PREFIX}}ServiceProvider::class);
+});
+
+it('resolves the application without errors', function () {
+    expect(app()->isBooted())->toBeTrue();
+});

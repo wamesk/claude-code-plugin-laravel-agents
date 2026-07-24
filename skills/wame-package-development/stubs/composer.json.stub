@@ -1,0 +1,37 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "{{VENDOR}}/{{PACKAGE}}",
+    "description": "{{DESCRIPTION}}",
+    "type": "library",
+    "license": "proprietary",
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^10.0 | ^11.0 | ^12.0"
+    },
+    "require-dev": {
+        "pestphp/pest": "^3.0 | ^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "{{NAMESPACE}}\\{{CLASS_PREFIX}}\\": "src/",
+            "{{NAMESPACE}}\\{{CLASS_PREFIX}}\\Tests\\": "tests/",
+            "{{NAMESPACE}}\\{{CLASS_PREFIX}}\\Database\\Factories\\": "database/factories/",
+            "{{NAMESPACE}}\\{{CLASS_PREFIX}}\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "{{NAMESPACE}}\\{{CLASS_PREFIX}}\\{{CLASS_PREFIX}}ServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

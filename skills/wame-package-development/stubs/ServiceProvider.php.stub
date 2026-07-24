@@ -1,0 +1,55 @@
+<?php
+
+namespace {{NAMESPACE}}\{{CLASS_PREFIX}};
+
+use Illuminate\Support\ServiceProvider;
+
+class {{CLASS_PREFIX}}ServiceProvider extends ServiceProvider
+{
+    /**
+     * Register bindings in the container. Runs for EVERY request, before boot().
+     * Only bind services / merge config here — never resolve other services,
+     * hit the DB, or touch routes (they may not exist yet).
+     */
+    public function register(): void
+    {
+        // Merge the package config so the host app always has sane defaults,
+        // even when the config has not been published.
+        // $this->mergeConfigFrom(__DIR__ . '/../config/{{PACKAGE}}.php', '{{PACKAGE}}');
+
+        // $this->app->singleton(SomeService::class);
+    }
+
+    /**
+     * Bootstrap package services after all providers are registered.
+     * Load resources here and expose them for publishing.
+     */
+    public function boot(): void
+    {
+        // Migrations run straight from the package (no publish required).
+        // $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+        // Routes, views, and translations loaded from the package.
+        // $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        // $this->loadViewsFrom(__DIR__ . '/../resources/views', '{{PACKAGE}}');
+        // $this->loadTranslationsFrom(__DIR__ . '/../lang', '{{PACKAGE}}');
+
+        // Console-only publishing so `vendor:publish` can copy assets into the host app.
+        if ($this->app->runningInConsole()) {
+            // Config: php artisan vendor:publish --tag={{PACKAGE}}-config
+            // $this->publishes([
+            //     __DIR__ . '/../config/{{PACKAGE}}.php' => config_path('{{PACKAGE}}.php'),
+            // ], '{{PACKAGE}}-config');
+
+            // Migrations: php artisan vendor:publish --tag={{PACKAGE}}-migrations
+            // $this->publishes([
+            //     __DIR__ . '/../database/migrations' => database_path('migrations'),
+            // ], '{{PACKAGE}}-migrations');
+
+            // Views: php artisan vendor:publish --tag={{PACKAGE}}-views
+            // $this->publishes([
+            //     __DIR__ . '/../resources/views' => resource_path('views/vendor/{{PACKAGE}}'),
+            // ], '{{PACKAGE}}-views');
+        }
+    }
+}

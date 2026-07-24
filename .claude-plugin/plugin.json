@@ -1,0 +1,9 @@
+{
+  "name": "laravel-agents",
+  "description": "Seven specialized Laravel subagents — laravel-backend, sql-database, api-architect, pest-tester, code-reviewer-laravel, security-auditor, performance-optimizer — plus four companion skills (wame-laravel-standards, wame-package-development, wame-security-checklist, wame-performance-playbook). The agents are thin personas that defer to progressively-disclosed reference skills instead of inlining examples: API response format, database conventions (ULID, enums, sort, dateTimeTz, data via migrations not seeders), service layer, testing patterns, clean composer package/module creation per laravelpackage.com (with stubs + composer.json path-repository wiring), OWASP Top 10 security checks, and a performance playbook. Nova-free by design — for Laravel Nova install laravel-nova-agents alongside.",
+  "author": {
+    "name": "Stanislav Červeňák",
+    "email": "info@wame.sk"
+  },
+  "version": "1.0.0"
+}

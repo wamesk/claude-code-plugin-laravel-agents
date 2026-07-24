@@ -1,0 +1,22 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+// use {{NAMESPACE}}\{{CLASS_PREFIX}}\Http\Controllers\{{CLASS_PREFIX}}Controller;
+
+/*
+|--------------------------------------------------------------------------
+| Package web routes
+|--------------------------------------------------------------------------
+| Loaded from the service provider via loadRoutesFrom(). Wrap in a group so
+| the host app controls the URL prefix and middleware. RESTful skeleton:
+*/
+
+// Route::middleware('web')->prefix('{{MODULE_SLUG}}')->group(function () {
+//     Route::get('/', [{{CLASS_PREFIX}}Controller::class, 'index'])->name('{{MODULE_SLUG}}.index');
+//     Route::get('/create', [{{CLASS_PREFIX}}Controller::class, 'create'])->name('{{MODULE_SLUG}}.create');
+//     Route::post('/', [{{CLASS_PREFIX}}Controller::class, 'store'])->name('{{MODULE_SLUG}}.store');
+//     Route::get('/{item}', [{{CLASS_PREFIX}}Controller::class, 'show'])->name('{{MODULE_SLUG}}.show');
+//     Route::get('/{item}/edit', [{{CLASS_PREFIX}}Controller::class, 'edit'])->name('{{MODULE_SLUG}}.edit');
+//     Route::put('/{item}', [{{CLASS_PREFIX}}Controller::class, 'update'])->name('{{MODULE_SLUG}}.update');
+//     Route::delete('/{item}', [{{CLASS_PREFIX}}Controller::class, 'destroy'])->name('{{MODULE_SLUG}}.destroy');
+// });
