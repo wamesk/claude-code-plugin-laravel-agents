@@ -33,11 +33,11 @@ These are the real, intended standards for WAME packages:
 Set these constraints in the package `composer.json` (see `stubs/composer.json.stub`).
 Everywhere else this skill says "the supported Laravel/Pest version" — use these:
 
-| Dependency        | Constraint                 |
-|-------------------|----------------------------|
-| PHP               | `^8.2` (8.2 / 8.3 / 8.4)   |
-| `illuminate/*`    | `^10.0 \| ^11.0 \| ^12.0`  |
-| Pest (dev)        | `^3.0 \| ^4.0`             |
+| Dependency        | Constraint                         |
+|-------------------|------------------------------------|
+| PHP               | `^8.2` (8.2 / 8.3 / 8.4 / 8.5)     |
+| `illuminate/*`    | `^10.0 \| ^11.0 \| ^12.0 \| ^13.0` |
+| Pest (dev)        | `^3.0 \| ^4.0`                     |
 
 Follow https://www.laravelpackage.com for the authoritative, version-current guide;
 this skill only holds the WAME-specific shape and wiring.

@@ -30,12 +30,11 @@ Namespaces in the examples use a generic `Vendor\Module` placeholder; the real n
 
 ## Supported versions
 
-- Laravel 12.x
-- PHP 8.2+
+- Laravel 13.x
+- PHP 8.3+
 - MySQL 8.x / PostgreSQL 15.x
 - Cache & queue driver: Redis
-- Profiling: Laravel Telescope, Laravel Debugbar, Laravel Pulse
-- Optional HTTP cache layer: Varnish / Cloudflare
+- Profiling: Laravel Telescope, Laravel Pulse
 
 Where a version is not stated in the prose below, assume the supported Laravel version listed here.
 
