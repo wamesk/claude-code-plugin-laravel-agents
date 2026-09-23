@@ -356,7 +356,7 @@ test('it works');
 
 ## Translation-key pattern
 
-No hardcoded user-facing strings — everything is a translation key. Response `code` values, validation messages, and field labels all use the same structure:
+No hardcoded user-facing strings — everything is a translation key, in Blade/Vue views, Filament/Nova fields, notifications, emails, and API responses alike. The **key** is always English words (`field.name.help`, never a translated phrase); the **value** in the language file is the target language. Translations are **modular** — one file per module/entity, never one shared catch-all file. Which languages a project ships, and whether translation into all of them is expected automatically, is defined in that project's own `CLAUDE.md` — check it before assuming a list. Response `code` values, validation messages, and field labels all use the same structure:
 
 ```
 module::entity.field.label

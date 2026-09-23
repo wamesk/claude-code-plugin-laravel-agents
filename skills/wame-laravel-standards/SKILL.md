@@ -44,7 +44,7 @@ Examples use the placeholder namespace root **`Vendor\Module`** and the composer
 - Enums for boolean and static values; `sort` (not `order`) for ordering.
 - Ship data/defaults via idempotent `*_seed_*.php` **migrations**, never database seeders. Factories exist for tests only.
 - Business logic lives in Services/Managers/Actions — never in controllers. Controllers stay thin.
-- No hardcoded user-facing strings — always translation keys.
+- No hardcoded user-facing strings — always translation keys. Key is always English words; value is the target language; one file per module/entity (see `reference/testing-patterns.md`).
 - Pest syntax for tests; cover both success and error paths.
 
 ## Reference map
