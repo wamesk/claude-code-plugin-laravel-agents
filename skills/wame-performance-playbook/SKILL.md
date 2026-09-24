@@ -36,7 +36,7 @@ Namespaces in the examples use a generic `Vendor\Module` placeholder; the real n
 - Cache & queue driver: Redis
 - Profiling: Laravel Telescope, Laravel Pulse
 
-Where a version is not stated in the prose below, assume the supported Laravel version listed here.
+Where a version is not stated in the prose below, assume the supported Laravel version listed here. That is the version the examples target; the project's installed version (`composer.lock`) decides what the code may use — check it before reaching for a newer API (`framework` in `wame-laravel-standards` → `reference/cross-cutting-quality.md`).
 
 ## Reference files
 

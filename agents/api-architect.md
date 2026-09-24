@@ -37,6 +37,7 @@ You are a Senior API Architect. You design scalable, well-documented RESTful API
 - Factories exist for tests only. Data, defaults, and lookup/reference rows ship via idempotent `*_seed_*` migrations whose `up()` writes rows only when they are absent — never via database seeders. Static/immutable catalogues may use Laravel Sushi.
 - Datetime fields serialize as ISO-8601; underlying columns use `dateTimeTz()` — never `timestamps()`, `softDeletes()`, or plain `datetime`/`timestamp`.
 - File storage uses `Storage::disk('s3')` against S3-compatible object storage / CDN; read credentials and endpoints from env, never hardcode them.
+- Specify the contract with the features of the Laravel version the project has installed (read it from `composer.lock` first) — e.g. `Rule::enum()`, `Password::defaults()`, scoped route bindings, `Http::retry()` for outbound calls — and never an API newer than that version. See `framework` in `wame-laravel-standards` → `reference/cross-cutting-quality.md`.
 
 ## When to invoke
 Invoke this agent at the start of any API work — when a feature needs its endpoints, URL structure, and response contract designed before code is written.

@@ -1,11 +1,11 @@
 ---
 name: wame-laravel-standards
-description: "Use when writing or reviewing non-Nova Laravel code — REST API endpoints, controllers, services, managers, actions, jobs, migrations, models, enums, observers/listeners, API resources & collections, or Pest feature tests. Apply the standard API response envelope (type/code/data), ULID + dateTimeTz database conventions, the migrations-not-seeders rule for shipping data, the service-layer architecture, and translation-key patterns. Triggers on phrases like 'API response format', 'migration conventions', 'service layer', 'BaseCollection pagination', 'seed migration', 'observer registration', 'Pest feature test'."
+description: "Use when writing or reviewing non-Nova Laravel code — REST API endpoints, controllers, services, managers, actions, jobs, migrations, models, enums, observers/listeners, API resources & collections, or Pest feature tests. Apply the standard API response envelope (type/code/data), ULID + dateTimeTz database conventions, the migrations-not-seeders rule for shipping data, the service-layer architecture, and translation-key patterns. Also holds the five cross-cutting build-time rules (ui_ux, performance, security, reachability — every new screen gets a menu entry and inbound links — and framework — the installed Laravel/PHP/Pest versions' idioms, nothing newer) with a pre-finish self-check. Triggers on phrases like 'API response format', 'migration conventions', 'service layer', 'BaseCollection pagination', 'seed migration', 'observer registration', 'Pest feature test', 'new page/screen', 'menu entry', 'cross-cutting quality', 'Laravel version idiom'."
 ---
 
 # WAME Laravel Standards
 
-Reusable, framework-level standards for building and reviewing **non-Nova** Laravel code in modular packages. This skill is the single source of truth for how APIs, databases, services and tests are structured across projects. Laravel Nova and browser (Dusk) content lives in a separate skill and is intentionally out of scope here.
+Reusable, framework-level standards for building and reviewing **non-Nova** Laravel code in modular packages. This skill is the single source of truth for how APIs, databases, services and tests are structured across projects. Laravel Nova and Nova/Dusk content lives in a separate skill (`wame-nova-patterns`, `laravel-nova-agents` plugin) and is intentionally out of scope here; the only browser test this skill asks for is one click-through per new screen, and only where the project already has a browser-test stack.
 
 ## When to use
 
@@ -18,6 +18,8 @@ Load this skill whenever you:
 - Write a Job or an Action class.
 - Write Pest **feature** tests (API, service, action, auth, database) or set up test helpers, factories, or datasets.
 - Add user-facing strings and need the translation-key convention.
+- Add or rename a screen, route, form, list, or button — apply the cross-cutting rules (`ui_ux`, `performance`, `security`, `reachability`, `framework`) and run the pre-finish self-check.
+- Are about to use a framework or language feature you remember rather than checked — detect the installed versions first and look the feature up (`framework` in `reference/cross-cutting-quality.md`).
 
 ## Supported versions
 
@@ -28,9 +30,9 @@ All version-specific guidance in this skill targets:
 - **Pest** 4.x (never PHPUnit class syntax)
 - **Composer** for dependency management
 - **Laravel Pint** for code style
-- Attribute-based observer/factory registration requires the supported Laravel version (Laravel 11+).
+- Attribute-based registration needs Laravel 10.44+ for `#[ObservedBy]` and 11.39+ for `#[UseFactory]`; on an older install, register the observer in a service provider and override `newFactory()`.
 
-Elsewhere in these docs, "the supported Laravel/Pest version" refers to the versions listed above.
+Elsewhere in these docs, "the supported Laravel/Pest version" refers to the versions listed above. These are the versions the examples target, not a licence: the project's **installed** versions (`composer.lock`, and the PHP floor from `composer.json`) decide what the code may use. Projects on older majors (Laravel 10/11, Pest 2/3) and newer ones (Laravel 13) exist — see `framework` in [`reference/cross-cutting-quality.md`](reference/cross-cutting-quality.md) for detection, docs lookup, and minimum versions.
 
 ## Namespace & package naming
 
@@ -46,6 +48,8 @@ Examples use the placeholder namespace root **`Vendor\Module`** and the composer
 - Business logic lives in Services/Managers/Actions — never in controllers. Controllers stay thin.
 - No hardcoded user-facing strings — always translation keys. Key is always English words; value is the target language; one file per module/entity (see `reference/testing-patterns.md`).
 - Pest syntax for tests; cover both success and error paths.
+- A new screen is reachable by clicking in the same change — a menu entry and/or inbound links from related screens, with link visibility using the same ability as the route. Hiding a link is not access control.
+- Use the installed versions' idioms and nothing newer: detect Laravel/PHP/Pest from `composer.lock` / `composer.json` before writing, never modernize code the task does not touch.
 
 ## Reference map
 
@@ -54,4 +58,5 @@ Detailed patterns, code examples and checklists live in `reference/`:
 - [`reference/api-response-format.md`](reference/api-response-format.md) — success/error envelope, API Resources, `BaseCollection` pagination (`data`/`meta`/`links`), HTTP status codes.
 - [`reference/database-conventions.md`](reference/database-conventions.md) — ULID keys, foreign keys & cascades, indexes, column-type optimization, enums, `sort` column, `dateTimeTz`, migration best practices, the migrations-not-seeders rule, and Laravel Sushi for static data.
 - [`reference/service-layer.md`](reference/service-layer.md) — Service/Manager/Action patterns, constructor property promotion, Observers & Listeners with modern `#[ObservedBy]` / `#[UseFactory]` registration, Job & Action patterns, storage.
-- [`reference/testing-patterns.md`](reference/testing-patterns.md) — Pest feature-test patterns (non-Nova), test helpers, factories, scenario builders, datasets, and the translation-key pattern.
+- [`reference/testing-patterns.md`](reference/testing-patterns.md) — Pest feature-test patterns (non-Nova), test helpers, factories, scenario builders, datasets, reachability & authorization tests for a new screen, and the translation-key pattern.
+- [`reference/cross-cutting-quality.md`](reference/cross-cutting-quality.md) — the five build-time quality dimensions with the same keys QA uses (`ui_ux`, `performance`, `security`, `reachability`, `framework`): menu entries and inbound links for new screens (Blade / Livewire / Inertia / SPA), object-scoped authorization, N+1/pagination/indexes, accessible and translated UI, the installed versions' idioms (version detection, docs lookup via Laravel Boost `search-docs` / context7, PHP 8.1–8.4, Laravel 10–13, and Pest 2–4 features with minimum versions, guardrails), a pre-finish self-check, and the finding format for reviewers (`framework` advisory).

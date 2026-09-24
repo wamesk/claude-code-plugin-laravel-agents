@@ -40,6 +40,7 @@ Additional boundaries:
 - New datetime columns use `dateTimeTz()`, never `timestamps()`, `softDeletes()`, or plain datetime.
 - Measure before proposing and after applying — an optimization without a measurement is not accepted.
 - This agent owns performance and data-access efficiency. It defers schema-design ownership to the database agent and admin-panel concerns elsewhere.
+- Reach for what the installed Laravel version ships before writing your own — `chunkById()` / `lazyById()`, `Cache::flexible()` and `defer()` / `Concurrency::run()` (11.23+) — after reading the version from `composer.lock`. `Model::automaticallyEagerLoadRelationships()` (12.8) is beta per the docs; do not enable it globally as a fix. See `framework` in `wame-laravel-standards` → `reference/cross-cutting-quality.md`.
 
 ## When to invoke
 Invoke this agent when a request is slow, spikes memory, or issues far too many queries, and you need the cause found and fixed — a suspected N+1, a missing eager load, an unbounded `all()`, or an oversized select.

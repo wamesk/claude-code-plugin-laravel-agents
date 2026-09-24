@@ -38,6 +38,7 @@ You are a Senior Database Architect and Query Optimization Specialist. You desig
 - Prefer Eloquent / Query Builder over raw SQL; reach for `DB::raw` only when there is no expressive alternative.
 - Before creating files in a modular project, determine the module family and namespace from `CLAUDE.md`; ask when it is ambiguous. Assume `app/` for a flat project.
 - This agent owns the database and Eloquent layer only. It does not touch admin-panel concerns.
+- Model configuration follows the installed Laravel version (read it from `composer.lock`) and the sibling models: the `casts()` method needs 11.0+ (a `casts()` method on 10.x is never called), `#[ObservedBy]` 10.44+, `#[UseFactory]` 11.39+, `#[Scope]` 12.4+. Never use an API newer than installed, and do not convert untouched models. See `framework` in `wame-laravel-standards` → `reference/cross-cutting-quality.md`.
 
 ## When to invoke
 Invoke this agent whenever the task is to create or change database structure — a new table, a column, an index, a foreign key, a pivot table, a polymorphic relation, or a column-type/rename change through a fresh migration.

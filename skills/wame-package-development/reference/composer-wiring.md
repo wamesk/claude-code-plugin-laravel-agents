@@ -55,7 +55,8 @@ use the `*` (or `dev-*` branch) constraint:
 Then install / refresh:
 
 ```bash
-composer require wamesk/example-widget:*
+# Quote the constraint: an unquoted `*` is a glob, and zsh aborts with "no matches found".
+composer require 'wamesk/example-widget:*'
 # or, if already listed:
 composer update wamesk/example-widget
 ```

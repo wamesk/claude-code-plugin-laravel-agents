@@ -1,6 +1,6 @@
 # Testing Patterns (Pest, non-Nova)
 
-Feature tests for APIs, services, actions, auth, and database state. Always Pest syntax — never PHPUnit class syntax. Browser/Nova (Dusk) tests are out of scope for this skill. Placeholders `Vendor\Module` / `vendor/module` map to the real names in `CLAUDE.md`.
+Feature tests for APIs, services, actions, auth, and database state. Always Pest syntax — never PHPUnit class syntax. Nova and Dusk tests live in the `wame-nova-patterns` skill (`laravel-nova-agents` plugin); general browser testing is out of scope here, except for the one click-through test per new screen described under *New screen: reachability & authorization*, and only when the project already has a browser-test stack. Placeholders `Vendor\Module` / `vendor/module` map to the real names in `CLAUDE.md`.
 
 ## Pest syntax (mandatory)
 
@@ -354,6 +354,86 @@ test('it works');
 - Isolated and deterministic — no interdependencies, mock external services.
 - Place each test in the module it belongs to (`vendor/module/tests/Feature/...`).
 
+## New screen: reachability & authorization
+
+A new web screen ships with tests proving it can be **reached** and is
+**guarded** — the `reachability` and `security` rules in
+[`cross-cutting-quality.md`](cross-cutting-quality.md). The link and the route
+must agree: an allowed user sees the link and opens the page, a denied user gets
+neither, and nobody opens another tenant's record by editing the URL.
+
+For Blade / Livewire the menu is server-rendered, so a feature test reads it
+straight from the HTML of a page that carries the layout:
+
+```php
+<?php
+
+declare(strict_types = 1);
+
+use Vendor\Module\Models\Invoice;
+use Vendor\Module\Models\User;
+
+test('users who may list invoices see the menu entry and can open the page', function () {
+    $user = User::factory()->accountant()->create(); // a state that passes InvoicePolicy::viewAny
+
+    $this->actingAs($user)
+        ->get(route('dashboard'))
+        ->assertOk()
+        // Match the whole href: a bare URL would also match /invoices/export.
+        ->assertSee('href="' . route('invoices.index') . '"', escape: false);
+
+    $this->get(route('invoices.index'))->assertOk();
+});
+
+test('users who may not list invoices see neither the menu entry nor the page', function () {
+    $this->actingAs(User::factory()->create())
+        ->get(route('dashboard'))
+        ->assertDontSee('href="' . route('invoices.index') . '"', escape: false);
+
+    $this->get(route('invoices.index'))->assertForbidden();
+});
+
+test('a user cannot open an invoice of another company', function () {
+    $user = User::factory()->accountant()->create();
+    $foreign = Invoice::factory()->create(); // belongs to a different company
+
+    $this->actingAs($user)
+        ->get(route('invoices.show', $foreign))
+        ->assertForbidden(); // or assertNotFound() when a tenant global scope hides the row
+});
+```
+
+For **Inertia / SPA** the menu renders client-side, so the HTML check above
+proves nothing. Assert the permission the layout reads instead (the prop path is
+whatever `HandleInertiaRequests::share()` exposes):
+
+```php
+use Inertia\Testing\AssertableInertia as Assert;
+
+$this->actingAs($user)
+    ->get(route('dashboard'))
+    ->assertInertia(fn (Assert $page) => $page->where('auth.can.invoices_view_any', true));
+```
+
+**Click-through (only where the project already has a browser-test stack —
+Pest 4 browser testing, Laravel Dusk, Playwright).** Add one test per new screen
+that starts at the entry page and reaches the screen by clicking its menu entry
+or inbound link — never by visiting its URL — so a missing or dead link fails:
+
+```php
+test('invoices are reachable from the main menu', function () {
+    $this->actingAs(User::factory()->accountant()->create());
+
+    visit('/')
+        ->click(__('invoice::invoice.plural'))
+        ->assertPathIs('/invoices')
+        ->assertNoJavascriptErrors();
+});
+```
+
+Do not introduce a browser stack just for this; without one, the feature tests
+above are the proof. Nova screens: see the `wame-nova-patterns` skill.
+
 ## Translation-key pattern
 
 No hardcoded user-facing strings — everything is a translation key, in Blade/Vue views, Filament/Nova fields, notifications, emails, and API responses alike. The **key** is always English words (`field.name.help`, never a translated phrase); the **value** in the language file is the target language. Translations are **modular** — one file per module/entity, never one shared catch-all file. Which languages a project ships, and whether translation into all of them is expected automatically, is defined in that project's own `CLAUDE.md` — check it before assuming a list. Response `code` values, validation messages, and field labels all use the same structure:
@@ -404,3 +484,4 @@ Tests assert on the `code` key (stable), not the translated sentence — as show
 - ✅ Factories are for tests only — never for shipping data.
 - ✅ Isolated, deterministic tests placed in the owning module.
 - ✅ Assert on translation `code` keys, not translated strings.
+- ✅ A new screen has reachability + authorization tests: link shown/hidden per ability, 403 for denied users and foreign-tenant records, and one click-through test where a browser stack exists.

@@ -71,7 +71,7 @@ this skill only holds the WAME-specific shape and wiring.
    }
    ```
 
-4. **Install & discover.** Run `composer require wamesk/example-widget:*` (or
+4. **Install & discover.** Run `composer require 'wamesk/example-widget:*'` (or
    `composer update wamesk/example-widget`). Laravel package auto-discovery reads
    `extra.laravel.providers` and registers the ServiceProvider — no manual step,
    and **no `modules:sync` command** (that InterNACHI workflow is replaced by the
