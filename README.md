@@ -47,6 +47,22 @@ For Laravel Nova projects, also install [`laravel-nova-agents`](https://github.c
 - **Quality built in, not bolted on.** The agents that build, test, and review code share one
   reference — `skills/wame-laravel-standards/reference/cross-cutting-quality.md` — see below.
 
+## Work mode (since 1.2.0)
+
+Every agent and the `wame-laravel-standards` skill read a mode once per task:
+
+| Mode | When | What happens |
+|------|------|--------------|
+| `build` | the brief says "build mode" / "režim stavby", or `.claude/wame-mode.local.md` says `mode: build` | Coding conventions still apply; tests (writing and running), Pint, version/docs lookups, the pre-finish self-check, click-through tests, browser work, and review sub-steps are skipped. The reply ends with `Deferred checks: …`, also appended to `.claude/wame-deferred.local.md`. `code-reviewer-laravel` is not called automatically. |
+| `harden` (default) | anything else | Every rule below applies unchanged. |
+
+The [`wame-work-mode`](https://github.com/wamesk/claude-code-plugin-wame-work-mode) plugin switches the
+mode (`/wame-mode build|harden|status`) and runs the deferred checks once (`/wame-harden`).
+
+**Browser tooling.** Never install or uninstall Playwright, Puppeteer, or Dusk for a single run. Use
+the chrome-devtools MCP or the runner the project already has; a missing runner means asking the user
+once and installing it permanently.
+
 ## Cross-cutting quality (since 1.1.0)
 
 The [`teamwork-task-test`](https://github.com/wamesk/claude-code-plugin-teamwork-task-test) plugin

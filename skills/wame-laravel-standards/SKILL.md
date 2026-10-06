@@ -18,8 +18,17 @@ Load this skill whenever you:
 - Write a Job or an Action class.
 - Write Pest **feature** tests (API, service, action, auth, database) or set up test helpers, factories, or datasets.
 - Add user-facing strings and need the translation-key convention.
-- Add or rename a screen, route, form, list, or button — apply the cross-cutting rules (`ui_ux`, `performance`, `security`, `reachability`, `framework`) and run the pre-finish self-check.
-- Are about to use a framework or language feature you remember rather than checked — detect the installed versions first and look the feature up (`framework` in `reference/cross-cutting-quality.md`).
+- Add or rename a screen, route, form, list, or button — apply the cross-cutting rules (`ui_ux`, `performance`, `security`, `reachability`, `framework`) and run the pre-finish self-check (harden mode; skipped in build mode).
+- Are about to use a framework or language feature you remember rather than checked — detect the installed versions first and look the feature up (`framework` in `reference/cross-cutting-quality.md`; harden mode — in build mode copy the sibling code's idiom).
+
+## Work mode
+
+- **build** — the brief says "build mode" / "režim stavby", or the project's `.claude/wame-mode.local.md` frontmatter says `mode: build`.
+- **harden** — anything else (the default). Every rule in this skill applies unchanged.
+
+In **build** mode, keep every coding convention in this skill, but skip writing and running tests, Pint, version and docs lookups, the pre-finish self-check, click-through tests, browser work, and review sub-steps. End the reply with one line `Deferred checks: <what was skipped> — <touched files/screens>`, and append the same to `.claude/wame-deferred.local.md` when that file exists or the mode came from `.claude/wame-mode.local.md`. `/wame-harden` (plugin `wame-work-mode`) runs every deferred check once.
+
+**Browser tooling.** Never install or uninstall Playwright, Puppeteer, Dusk, or any browser driver for a single run. Use the chrome-devtools MCP or the browser-test runner the project already has; if a runner is missing and one is really needed, ask the user once, and on yes install it permanently as a committed dev dependency — never remove it afterwards.
 
 ## Supported versions
 

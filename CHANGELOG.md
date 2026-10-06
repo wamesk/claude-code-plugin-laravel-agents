@@ -5,6 +5,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-10-06
+
+Agents spent most of each prompt verifying instead of building — tests, Pint,
+the five-dimension self-check, docs lookups, browser checks — on almost every
+change, and sometimes installed and uninstalled Playwright or Puppeteer for a
+single run. This release splits the work into two modes: **build** builds fast
+and records what it skipped; **harden** (the default) keeps every rule as it was,
+and the `wame-work-mode` plugin's `/wame-harden` runs the deferred checks once at
+the end.
+
+### Added
+
+- A short **Work mode** section near the top of `laravel-backend`,
+  `pest-tester`, `code-reviewer-laravel`, `performance-optimizer`, and the
+  `wame-laravel-standards` skill. Mode is `build` when the brief says "build
+  mode" / "režim stavby" or the project's `.claude/wame-mode.local.md`
+  frontmatter says `mode: build`; anything else is `harden`. In build mode the
+  agents keep every coding convention but skip writing and running tests, Pint,
+  version and docs lookups (they copy the sibling code's idioms instead), the
+  pre-finish self-check, click-through tests, browser work, and review
+  sub-steps, and end with a `Deferred checks: …` line that is also appended to
+  `.claude/wame-deferred.local.md`.
+- A browser-tooling rule wherever browser tests are mentioned: never install or
+  uninstall Playwright, Puppeteer, or Dusk for a single run; use the
+  chrome-devtools MCP or the runner the project already has; a missing runner
+  means asking the user once and installing it permanently.
+
+### Changed
+
+- The mandatory steps are now marked "(harden mode)": Pest tests in
+  `laravel-backend`, the pre-finish self-check, the `framework` version and docs
+  lookups, the reachability/authorization and click-through tests in
+  `pest-tester` and `testing-patterns.md`, Pint in `code-reviewer-laravel`
+  (which is no longer an automatic step in build mode; called explicitly, it
+  reviews without running Pint or tests), and the before/after measurement in
+  `performance-optimizer` (deferred, not dropped). Harden-mode wording is
+  otherwise unchanged.
+
 ## [1.1.0] - 2026-09-24
 
 Aligns the build side with the QA side: `teamwork-task-test` 1.1.0 reviews every
