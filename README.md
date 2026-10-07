@@ -53,11 +53,16 @@ Every agent and the `wame-laravel-standards` skill read a mode once per task:
 
 | Mode | When | What happens |
 |------|------|--------------|
-| `build` | the brief says "build mode" / "režim stavby", or `.claude/wame-mode.local.md` says `mode: build` | Coding conventions still apply; tests (writing and running), Pint, version/docs lookups, the pre-finish self-check, click-through tests, browser work, and review sub-steps are skipped. The reply ends with `Deferred checks: …`, also appended to `.claude/wame-deferred.local.md`. `code-reviewer-laravel` is not called automatically. |
-| `harden` (default) | anything else | Every rule below applies unchanged. |
+| `fast` | the brief says "fast mode" / "rýchly režim", or `.claude/work-mode.local.md` says `mode: fast` | Coding conventions still apply; tests (writing and running), Pint, version/docs lookups, the pre-finish self-check, click-through tests, browser work, and review sub-steps are skipped. The reply ends with `Deferred checks: …`, also appended to `.claude/work-mode-deferred.local.md`. `code-reviewer-laravel` is not called automatically. |
+| `full` (default) | anything else | Every rule below applies unchanged. |
 
-The [`wame-work-mode`](https://github.com/wamesk/claude-code-plugin-wame-work-mode) plugin switches the
-mode (`/wame-mode build|harden|status`) and runs the deferred checks once (`/wame-harden`).
+The [`work-mode`](https://github.com/wamesk/claude-code-plugin-work-mode) plugin switches the
+mode (`/work-mode fast|full|status`; no argument shows a menu). `/work-mode full` runs the pending
+deferred checks once, then switches to full.
+
+The names from `wame-work-mode` 1.x are still recognised for one version: a brief saying
+"build mode" / "režim stavby", `.claude/wame-mode.local.md` with `mode: build`, and `.claude/wame-deferred.local.md`
+(moved to the new name before the first append).
 
 **Browser tooling.** Never install or uninstall Playwright, Puppeteer, or Dusk for a single run. Use
 the chrome-devtools MCP or the runner the project already has; a missing runner means asking the user

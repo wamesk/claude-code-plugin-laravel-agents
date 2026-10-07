@@ -2,7 +2,7 @@
 
 Feature tests for APIs, services, actions, auth, and database state. Always Pest syntax — never PHPUnit class syntax. Nova and Dusk tests live in the `wame-nova-patterns` skill (`laravel-nova-agents` plugin); general browser testing is out of scope here, except for the one click-through test per new screen described under *New screen: reachability & authorization*, and only when the project already has a browser-test stack. Placeholders `Vendor\Module` / `vendor/module` map to the real names in `CLAUDE.md`.
 
-Tests are a harden-mode step: in build mode (see *Work mode* in `SKILL.md`) they are not written or run, only named on the `Deferred checks:` line.
+Tests are a full-mode step: in fast mode (see *Work mode* in `SKILL.md`) they are not written or run, only named on the `Deferred checks:` line.
 
 ## Pest syntax (mandatory)
 
@@ -417,7 +417,7 @@ $this->actingAs($user)
     ->assertInertia(fn (Assert $page) => $page->where('auth.can.invoices_view_any', true));
 ```
 
-**Click-through (harden mode; only where the project already has a
+**Click-through (full mode; only where the project already has a
 browser-test stack — Pest 4 browser testing, Laravel Dusk, Playwright).** Add one test per new screen
 that starts at the entry page and reaches the screen by clicking its menu entry
 or inbound link — never by visiting its URL — so a missing or dead link fails:
@@ -488,4 +488,4 @@ Tests assert on the `code` key (stable), not the translated sentence — as show
 - ✅ Factories are for tests only — never for shipping data.
 - ✅ Isolated, deterministic tests placed in the owning module.
 - ✅ Assert on translation `code` keys, not translated strings.
-- ✅ (harden mode) A new screen has reachability + authorization tests: link shown/hidden per ability, 403 for denied users and foreign-tenant records, and one click-through test where a browser stack exists.
+- ✅ (full mode) A new screen has reachability + authorization tests: link shown/hidden per ability, 403 for denied users and foreign-tenant records, and one click-through test where a browser stack exists.

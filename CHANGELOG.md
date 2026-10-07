@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-10-07
+
+The `wame-work-mode` plugin is now `work-mode` 2.0.0, and its two modes have
+plainer names: **build** is now **fast**, **harden** is now **full** (still the
+default). This release follows the rename; what each mode skips or keeps is
+unchanged.
+
+### Changed
+
+- The **Work mode** section of `laravel-backend`, `pest-tester`,
+  `code-reviewer-laravel`, `performance-optimizer`, and the
+  `wame-laravel-standards` skill now reads fast and full. Mode is `fast` when
+  the brief says "fast mode" / "rýchly režim" or the project's
+  `.claude/work-mode.local.md` frontmatter says `mode: fast`; anything else is
+  `full`. Every "(harden mode)" marker in the agents, `cross-cutting-quality.md`,
+  and `testing-patterns.md` now reads "(full mode)". The closing
+  `Deferred checks: …` line is unchanged.
+- The deferred list is now `.claude/work-mode-deferred.local.md`. When only the
+  legacy `.claude/wame-deferred.local.md` exists, the agents move it to the new
+  name before appending; the list is never staged or committed.
+- `/wame-harden` is now `/work-mode full` (runs the pending deferred checks once,
+  then switches to full), and `/wame-mode build|harden|status` is now
+  `/work-mode fast|full|status` — in the agents, the skill, the README, and the
+  plugin description.
+
+### Deprecated
+
+- The legacy names are still recognised for one version: a brief saying "build
+  mode" / "režim stavby", `.claude/wame-mode.local.md` with `mode: build`, and
+  `.claude/wame-deferred.local.md`. They will be removed together with
+  work-mode 3.0.0.
+
 ## [1.2.0] - 2026-10-06
 
 Agents spent most of each prompt verifying instead of building — tests, Pint,

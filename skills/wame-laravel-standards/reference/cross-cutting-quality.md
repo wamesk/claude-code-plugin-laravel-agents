@@ -165,9 +165,9 @@ are silently not cast.
 
 ### 1. Detect the real versions first
 
-Once per task, before writing code; reuse the result. Harden mode only — in
-build mode skip the detection and copy the idioms the sibling code already uses;
-`/wame-harden` checks the versions once at the end. The snippets are
+Once per task, before writing code; reuse the result. Full mode only — in
+fast mode skip the detection and copy the idioms the sibling code already uses;
+`/work-mode full` checks the versions once at the end. The snippets are
 zsh-safe:
 
 ```bash
@@ -204,7 +204,7 @@ if [ -f .browserslistrc ]; then cat .browserslistrc; fi
 
 ### 2. Look the version up in current docs, not in memory
 
-Harden mode only — in build mode skip the lookup. In harden mode, in this order:
+Full mode only — in fast mode skip the lookup. In full mode, in this order:
 
 1. **Laravel Boost `search-docs`** (`mcp__laravel-boost__search-docs`) when the
    project has `laravel/boost` — it searches the docs of the *installed* versions
@@ -299,14 +299,14 @@ build tool's default target.
 has the Pest patterns: the link is rendered for an allowed user and not for a
 denied one, the route answers 403 for the denied user and for another tenant's
 record, and — where the project already has a browser-test stack — one test
-that reaches the screen by clicking instead of visiting its URL (harden mode).
+that reaches the screen by clicking instead of visiting its URL (full mode).
 Never install or uninstall a browser stack for one run; a missing runner means
 asking the user once and installing it permanently.
 
 ## Pre-finish self-check
 
-Run this before calling the change done (harden mode; in build mode it is
-skipped, named on the `Deferred checks:` line, and `/wame-harden` runs it once).
+Run this before calling the change done (full mode; in fast mode it is
+skipped, named on the `Deferred checks:` line, and `/work-mode full` runs it once).
 Answer each line for the diff, not for the whole app; skip a dimension only when its "applies when" does not hold.
 
 - **reachability** — Every new screen has a menu entry and/or an inbound link
