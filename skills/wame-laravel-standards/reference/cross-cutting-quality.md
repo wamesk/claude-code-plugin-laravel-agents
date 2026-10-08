@@ -122,6 +122,8 @@ Deep dive: `wame-performance-playbook` → `reference/query-optimization.md`.
 **Applies when** the change renders something a person sees: a Blade / Livewire /
 Inertia / SPA view, a component, an e-mail or notification. For a pure backend
 change only the translation rule applies (to validation and flash messages).
+In fast mode these rules apply while writing exactly as in full mode; only the
+pre-finish self-check is deferred.
 
 - Follow the sibling screens: same layout, components, spacing, table/form
   patterns. Reuse the existing component before writing a new one.
@@ -307,6 +309,9 @@ asking the user once and installing it permanently.
 
 Run this before calling the change done (full mode; in fast mode it is
 skipped, named on the `Deferred checks:` line, and `/work-mode full` runs it once).
+Fast mode skips the check, not the rules: `ui_ux` applies while writing (see
+above), and `performance`, `security`, and `reachability` are covered by the
+patterns the sibling code already uses.
 Answer each line for the diff, not for the whole app; skip a dimension only when its "applies when" does not hold.
 
 - **reachability** — Every new screen has a menu entry and/or an inbound link

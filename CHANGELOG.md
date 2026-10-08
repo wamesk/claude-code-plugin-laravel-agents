@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-10-08
+
+Fast mode skips checks, not quality. Only the verification is deferred — the
+code written in fast mode should already be as good as in full mode. Full mode
+is unchanged.
+
+### Changed
+
+- `ui_ux` (UI/UX and accessibility) now applies in fast mode exactly as in full
+  mode, while writing the code — there is no separate check step. Said in the
+  **Work mode** section of `laravel-backend` (and its UI/UX rule) and the
+  `wame-laravel-standards` skill, and in the `ui_ux` section of
+  `cross-cutting-quality.md`.
+- `performance`, `security`, and `reachability` get no planning or check in fast
+  mode, but the code covers them by following the patterns the sibling code
+  already uses — eager loading, policies/gates, menu entries and inbound links.
+- `framework` is unchanged: fast mode copies the sibling code's idioms without
+  version or docs lookups, and `/work-mode full` checks them. The pre-finish
+  self-check stays deferred to the `Deferred checks:` line; the
+  *Pre-finish self-check* section now says that deferring the check does not
+  drop the rules. README and the plugin description follow.
+
 ## [1.3.0] - 2026-10-07
 
 The `wame-work-mode` plugin is now `work-mode` 2.0.0, and its two modes have

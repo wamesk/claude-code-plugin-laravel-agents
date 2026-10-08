@@ -53,7 +53,7 @@ Every agent and the `wame-laravel-standards` skill read a mode once per task:
 
 | Mode | When | What happens |
 |------|------|--------------|
-| `fast` | the brief says "fast mode" / "rýchly režim", or `.claude/work-mode.local.md` says `mode: fast` | Coding conventions still apply; tests (writing and running), Pint, version/docs lookups, the pre-finish self-check, click-through tests, browser work, and review sub-steps are skipped. The reply ends with `Deferred checks: …`, also appended to `.claude/work-mode-deferred.local.md`. `code-reviewer-laravel` is not called automatically. |
+| `fast` | the brief says "fast mode" / "rýchly režim", or `.claude/work-mode.local.md` says `mode: fast` | Coding conventions and the `ui_ux` rules still apply while writing; `performance`, `security`, and `reachability` follow the sibling code's patterns without a separate check. Tests (writing and running), Pint, version/docs lookups, the pre-finish self-check, click-through tests, browser work, and review sub-steps are skipped. The reply ends with `Deferred checks: …`, also appended to `.claude/work-mode-deferred.local.md`. `code-reviewer-laravel` is not called automatically. |
 | `full` (default) | anything else | Every rule below applies unchanged. |
 
 The [`work-mode`](https://github.com/wamesk/claude-code-plugin-work-mode) plugin switches the
